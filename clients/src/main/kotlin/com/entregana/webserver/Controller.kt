@@ -1,4 +1,4 @@
-package com.template.webserver
+package com.entregana.webserver
 
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,8 +18,8 @@ class Controller(rpc: NodeRPCConnection) {
 
     private val proxy = rpc.proxy
 
-    @GetMapping(value = ["/templateendpoint"], produces = ["text/plain"])
-    private fun templateendpoint(): String {
+    @GetMapping(value = "/entregana-endpoint", produces = arrayOf("text/plain"))
+    private fun entreganaEndpoint(): String {
         return "Define an endpoint here."
     }
 }

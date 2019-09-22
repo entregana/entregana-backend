@@ -94,7 +94,7 @@ dependencies {
 
 cordapp {
     info {
-        name "CorDapp Template"
+        name "Entregana CorDapp"
         vendor "Corda Open Source"
         targetPlatformVersion corda_platform_version
         minimumPlatformVersion corda_platform_version
@@ -145,4 +145,3 @@ task installQuasar(type: Copy) {
         rename 'quasar-core(.*).jar', 'quasar.jar'
     }
 }
-

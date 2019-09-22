@@ -1,4 +1,4 @@
-package com.template
+package com.entregana
 
 import net.corda.core.identity.CordaX500Name
 import net.corda.core.utilities.getOrThrow

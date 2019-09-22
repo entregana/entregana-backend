@@ -1,6 +1,6 @@
-package com.template
+package com.entregana
 
-import com.template.flows.Responder
+import com.entregana.flows.Responder
 import net.corda.testing.node.MockNetwork
 import net.corda.testing.node.MockNetworkParameters
 import net.corda.testing.node.TestCordapp
@@ -10,8 +10,8 @@ import org.junit.Test
 
 class FlowTests {
     private val network = MockNetwork(MockNetworkParameters(cordappsForAllNodes = listOf(
-        TestCordapp.findCordapp("com.template.contracts"),
-        TestCordapp.findCordapp("com.template.flows")
+        TestCordapp.findCordapp("com.entregana.contracts"),
+        TestCordapp.findCordapp("com.entregana.flows")
     )))
     private val a = network.createNode()
     private val b = network.createNode()
