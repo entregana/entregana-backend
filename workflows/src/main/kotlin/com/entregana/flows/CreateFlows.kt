@@ -26,9 +26,9 @@ class CreateFlowInitiator(
     @Suspendable
     override fun call(): DeliveryState {
         val deliveryState = DeliveryState(
-            packageType=packageType,
+            packageType= packageType,
             sender = ourIdentity,
-            courier=courier,
+            courier = courier,
             recipient = recipient,
             status = status
         )
