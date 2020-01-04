@@ -3,6 +3,7 @@ package com.entregana.webserver.controllers
 import com.entregana.webserver.dtos.DeliveryDto
 import com.entregana.webserver.forms.DeliveryForm
 import com.entregana.webserver.services.DeliveryService
+import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -14,6 +15,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/deliveries") // The paths for GET and POST requests are relative to this base path.
+@Api(value="Entregana Delivery API")
 class DeliveryController {
 
     @Autowired
