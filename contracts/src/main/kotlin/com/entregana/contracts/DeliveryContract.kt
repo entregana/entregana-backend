@@ -1,7 +1,9 @@
 package com.entregana.contracts
 
+import com.entregana.states.DeliveryState
 import net.corda.core.contracts.CommandData
 import net.corda.core.contracts.Contract
+import net.corda.core.contracts.requireThat
 import net.corda.core.transactions.LedgerTransaction
 
 // ************
@@ -9,18 +11,54 @@ import net.corda.core.transactions.LedgerTransaction
 // ************
 class DeliveryContract : Contract {
     companion object {
-        // Used to identify our contract when building a transaction.
         const val ID = "com.entregana.contracts.DeliveryContract"
     }
 
-    // A transaction is valid if the verify() function of the contract of all the transaction's input and output states
-    // does not throw an exception.
-    override fun verify(tx: LedgerTransaction) {
-        // Verification logic goes here.
+    interface Commands : CommandData {
+        class Create : Commands
+        class ChangeStatus: Commands
+        class ChangeDetails: Commands
+        class Complete: Commands
     }
 
-    // Used to indicate the transaction's intent.
-    interface Commands : CommandData {
-        class Action : Commands
+    override fun verify(tx: LedgerTransaction) {
+        val inputs = tx.inputsOfType<DeliveryState>()
+        val outputs = tx.outputsOfType<DeliveryState>()
+        val command = tx.commandsOfType<Commands>().single()
+
+        when (command.value) {
+            is Commands.Create -> requireThat {
+                "No inputs should be consumed." using (inputs.isEmpty())
+                "One output should be produced." using (outputs.size == 1)
+
+                val state = outputs.single()
+                "The recipient address should not be empty." using (state.recipient.address.isNotEmpty())
+                "The status should not be empty." using (state.status.isNotEmpty())
+            }
+            is Commands.ChangeStatus -> requireThat {
+                "One input should be consumed." using (inputs.size == 1)
+                "One output should be produced." using (outputs.size == 1)
+
+                val inputState = inputs.single()
+                val outputState = outputs.single()
+                "The status should change." using (inputState.status != outputState.status)
+                "Only the status should change." using (inputState == outputState.copy(status = inputState.status))
+                "The status should not be empty." using (outputState.status.isNotEmpty())
+            }
+            is Commands.ChangeDetails -> requireThat {
+                "One input should be consumed." using (inputs.size == 1)
+                "One output should be produced." using (outputs.size == 1)
+
+                val inputState = inputs.single()
+                val outputState = outputs.single()
+                "The details should change." using (inputState != outputState)
+                "The status should not change." using (inputState.status == outputState.status)
+                "The recipient address should not be empty." using (outputState.recipient.address.isNotEmpty())
+            }
+            is Commands.Complete -> requireThat {
+                "One input should be consumed." using (inputs.size == 1)
+                "No outputs should be produced." using (outputs.isEmpty())
+            }
+        }
     }
 }
