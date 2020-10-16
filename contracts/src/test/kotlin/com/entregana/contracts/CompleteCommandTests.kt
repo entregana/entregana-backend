@@ -25,7 +25,8 @@ class CompleteCommandTests {
         sender = sender.party,
         courier = courier.party,
         recipient = recipient,
-        status = "Pending"
+        status = "Pending",
+        otherDetails = "To be delivered between 9AM and 6PM"
     )
 
     @Test

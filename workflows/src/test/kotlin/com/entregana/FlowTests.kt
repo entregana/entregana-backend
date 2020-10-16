@@ -46,6 +46,7 @@ class FlowTests {
             courier = courier.info.chooseIdentity(),
             recipient = recipient,
             status = "Pending",
+            otherDetails = "To be delivered between 9AM and 6PM",
             notaryToUse = network.defaultNotaryIdentity
         )
         val resultFuture = sender.startFlow(flow)

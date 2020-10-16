@@ -19,6 +19,7 @@ class CreateFlowInitiator(
     val courier: Party,
     val recipient: Recipient,
     val status: String,
+    val otherDetails: Any,
     val notaryToUse: Party
 ) : FlowLogic<DeliveryState>() {
     override val progressTracker = ProgressTracker()
@@ -26,11 +27,12 @@ class CreateFlowInitiator(
     @Suspendable
     override fun call(): DeliveryState {
         val deliveryState = DeliveryState(
-            packageType= packageType,
+            packageType = packageType,
             sender = ourIdentity,
             courier = courier,
             recipient = recipient,
-            status = status
+            status = status,
+            otherDetails = otherDetails
         )
 
         val createCommand = Command(

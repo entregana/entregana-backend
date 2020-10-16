@@ -17,6 +17,7 @@ data class DeliveryState(
         val courier: Party,
         val recipient: Recipient,
         val status: String,
+        val otherDetails: Any? = null,
         override val linearId: UniqueIdentifier = UniqueIdentifier(),
         override val participants: List<Party> = listOf(sender, courier)
 ) : LinearState
@@ -28,5 +29,5 @@ data class Recipient(
     val address: String,
     val email: String,
     val phone: String,
-    val additionalDetails: String = ""
+    val additionalDetails: String? = ""
 )

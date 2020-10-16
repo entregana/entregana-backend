@@ -76,6 +76,7 @@ class DeliveryServiceImpl(nodeRPCConnection: NodeRPCConnection): DeliveryService
             ),
             this.recipientDtoMapper.mapToDomain(form.recipient),
             form.status,
+            form.otherDetails,
             notary
         ).returnValue.getOrThrow()
         return deliveryDtoMapper.mapToDto(deliveryState)
@@ -98,7 +99,8 @@ class DeliveryServiceImpl(nodeRPCConnection: NodeRPCConnection): DeliveryService
             courier = proxy.wellKnownPartyFromX500Name(
                 CordaX500Name.parse(form.courier)
             )!!,
-            recipient = recipientDtoMapper.mapToDomain(form.recipient)
+            recipient = recipientDtoMapper.mapToDomain(form.recipient),
+            otherDetails = form.otherDetails
         )
 
         if (tempState != resultingState) {

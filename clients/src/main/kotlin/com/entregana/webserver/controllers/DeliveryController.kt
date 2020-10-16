@@ -4,6 +4,7 @@ import com.entregana.webserver.dtos.DeliveryDto
 import com.entregana.webserver.forms.DeliveryForm
 import com.entregana.webserver.services.DeliveryService
 import io.swagger.annotations.Api
+import com.entregana.webserver.types.DeliveryType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -30,7 +31,7 @@ class DeliveryController {
 
     @GetMapping("completed", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getCompletedDeliveries(): ResponseEntity<List<DeliveryDto>> {
-        val deliveryDtos = deliveryService.retrieveDeliveryStates(completed=true)
+        val deliveryDtos = deliveryService.retrieveDeliveryStates(type=DeliveryType.ALL)
         return ResponseEntity.ok(deliveryDtos)
     }
 

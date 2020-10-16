@@ -15,5 +15,7 @@ data class DeliveryForm (
     val recipient: RecipientDto,
 
     @NotBlank
-    val status: String
+    val status: String,
+
+    val otherDetails: Any
 )

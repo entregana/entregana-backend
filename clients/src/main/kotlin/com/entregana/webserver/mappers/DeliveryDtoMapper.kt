@@ -20,6 +20,7 @@ class DeliveryDtoMapper {
             courier = domain.courier.name.toString(),
             recipient = recipientDtoMapper.mapToDto(domain.recipient),
             status = domain.status,
+            otherDetails = domain.otherDetails,
             modifiedAt = metadata?.recordedTime,
             type =
                 if (metadata != null) {

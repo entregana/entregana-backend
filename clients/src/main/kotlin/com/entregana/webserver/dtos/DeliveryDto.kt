@@ -10,6 +10,7 @@ data class DeliveryDto(
     val courier: String,
     val recipient: RecipientDto,
     val status: String,
+    val otherDetails: Any? = null,
     val modifiedAt: Instant?,
     val type: RecordType?
 )

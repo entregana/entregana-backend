@@ -24,6 +24,6 @@ class RecipientDtoMapper {
             address = dto.address,
             email = dto.email,
             phone = dto.phone,
-            additionalDetails = if (dto.additionalDetails != null) dto.additionalDetails else ""
+            additionalDetails = dto.additionalDetails
         )
 }
